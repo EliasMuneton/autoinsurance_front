@@ -57,7 +57,7 @@ const ClaimItem = (props) => {
           </div>
         ) : (
           <>
-            {authCtx.user_role_id == 1 && (
+            {(authCtx.user_role_id == 1 && props.claimStatusId == 1) && (
               <ClaimAttended
                 claimSubjectId={props.claimSubjectId}
                 description={props.description}
