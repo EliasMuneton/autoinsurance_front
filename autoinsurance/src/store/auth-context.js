@@ -50,12 +50,14 @@ export const AuthContextProvider = props => {
 
   const loginHandler = (token) => {
     const decoded = jwt_decode(token);
-    setToken(token);
-    setEmail(decoded.user_email);
     localStorage.setItem('token', token);
     localStorage.setItem('email', decoded.user_email);
     localStorage.setItem('user_role_id', decoded.user_role_id);
     localStorage.setItem('user_id', decoded.user_id);
+    setToken(token);
+    setEmail(decoded.user_email);
+    setUserId(decoded.user_id);
+    setUserRoleId(decoded.user_role_id);
     setIsAuthenticated(true);
   };
 

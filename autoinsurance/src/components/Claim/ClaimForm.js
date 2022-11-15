@@ -10,12 +10,20 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
 
 const ClaimForm = (props) => {
+  const [validated, setValidated] = useState(false);
+  const [validSelect, setValidSelect] = useState(false);
   const [statusIdInput, setStatusId] = useState("");
   const [suibjectIdInput, setSubjectId] = useState("");
   const descriptionInputRef = useRef();
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setValidated(true);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return;
+    }
 
     const descriptionInput = (descriptionInputRef.current) ? descriptionInputRef.current.value : '';
     const claimStatus = statusIdInput;
@@ -38,6 +46,7 @@ const ClaimForm = (props) => {
   const handleSetClaimSubject = (subjectValue) => {
     if (subjectValue) {
       setSubjectId(subjectValue.claimSubjectId);
+      setValidSelect(true);
     }
   };
 
@@ -45,11 +54,14 @@ const ClaimForm = (props) => {
     if (props.claimData && descriptionInputRef.current) {
       descriptionInputRef.current.value = props.claimData[0]["description"];
     }
+    if (props.isSearch) {
+      setValidSelect(true);
+    }
   }, [props]);
 
   return (
     <Fragment>
-      <Form onSubmit={submitHandler}>
+      <Form noValidate validated={validated} onSubmit={submitHandler}>
         <Row>
           <ClaimSelect
             onSelectStatus={handleSetClaimStatus}
@@ -71,6 +83,9 @@ const ClaimForm = (props) => {
                 ref={descriptionInputRef}
                 required={props.isSearch ? false : true}
               />
+              <Form.Control.Feedback type="invalid">
+                Please fill Description.
+              </Form.Control.Feedback>
             </Form.Group>
             }
             
@@ -82,7 +97,7 @@ const ClaimForm = (props) => {
             <LoadingSpinner />
           </div>
         ) : (
-          <Button variant="primary" type="submit" value="Submit">
+          <Button disabled={!validSelect} variant="primary" type="submit" value="Submit">
             {props.btnActionName}
           </Button>
         )}

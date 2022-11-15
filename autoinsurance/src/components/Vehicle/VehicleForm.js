@@ -9,6 +9,8 @@ import VehicleSelect from "./VehicleSelect";
 import LoadingMessage from "../UI/LodingMessage";
 
 const VehicleForm = (props) => {
+  const [validated, setValidated] = useState(false);
+  const [validSelect, setValidSelect] = useState(false);
   const [modelIdInput, setModelId] = useState("");
   const [colorIdInput, setColorId] = useState("");
   const vehicleYearInputRef = useRef();
@@ -17,6 +19,12 @@ const VehicleForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setValidated(true);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return;
+    }
 
     const vehicleYearInput = vehicleYearInputRef.current.value;
     const licencePlateInput = licencePlateInputRef.current.value;
@@ -38,11 +46,17 @@ const VehicleForm = (props) => {
     if (modelValue) {
       setModelId(modelValue.modelId);
     }
+    if (colorIdInput) {
+      setValidSelect(true);
+    }
   };
 
   const handleColor = (colorValue) => {
     if (colorValue) {
       setColorId(colorValue.colorId);
+    }
+    if (modelIdInput) {
+      setValidSelect(true);
     }
   };
 
@@ -52,11 +66,14 @@ const VehicleForm = (props) => {
       licencePlateInputRef.current.value = props.vehicleData[0]["licencePlate"];
       descriptionInputRef.current.value = props.vehicleData[0]["description"];
     }
+    if (props.isSearch) {
+      setValidSelect(true);
+    }
   }, [props]);
 
   return (
     <Fragment>
-      <Form onSubmit={submitHandler}>
+      <Form noValidate validated={validated} onSubmit={submitHandler}>
         <Row>
           <VehicleSelect
             onSelectModel={handleModel}
@@ -77,6 +94,9 @@ const VehicleForm = (props) => {
                 ref={vehicleYearInputRef}
                 required={props.isSearch ? false : true}
               />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid year between 2010 and 2023.
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col sm={12} md={12} lg={4}>
@@ -87,8 +107,12 @@ const VehicleForm = (props) => {
                 placeholder="Licence Plate"
                 maxLength={10}
                 ref={licencePlateInputRef}
+                pattern="\S*\d+\S*"
                 required={props.isSearch ? false : true}
               />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid Licence Plate (Only words and numbers)
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           { !props.isSearch &&
@@ -113,9 +137,11 @@ const VehicleForm = (props) => {
             <LoadingSpinner />
           </div>
         ) : (
-          <Button variant="primary" type="submit" value="Submit">
+          <>
+          <Button disabled={!validSelect} variant="primary" type="submit" value="Submit">
             {props.btnActionName}
           </Button>
+          </>
         )}
       </Form>
       <br></br>

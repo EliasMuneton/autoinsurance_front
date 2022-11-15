@@ -8,7 +8,7 @@ const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
   return (
     <Card className="text-center">
-      <Card.Header>Auto Insurance Web Site</Card.Header>
+      <Card.Header>Autoinsurance Web Site</Card.Header>
       <Card.Body>
         <Card.Title>Welcome on board!</Card.Title>
         <Card.Text>

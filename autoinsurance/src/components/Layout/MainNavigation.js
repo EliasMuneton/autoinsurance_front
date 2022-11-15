@@ -14,6 +14,8 @@ const MainNavigation = () => {
 
   const isLoggedIn = authCtx.isLoggedIn;
 
+  const user_role_id = authCtx.user_role_id;
+
   const logoutHandler = () => {
     authCtx.logout();
     history.push("/");
@@ -31,10 +33,23 @@ const MainNavigation = () => {
                 <NavDropdown title="Vehicle" id="vehicleDropDown">
                   <NavDropdown.Item href="/vehicle">Vehicle</NavDropdown.Item>
                   <NavDropdown.Item href="/vehicles">Search Vehicle</NavDropdown.Item>
+                  <>
+                  {user_role_id == 1 &&
+                  <>
+                    <NavDropdown.Item href="/vehicle/brand">Add Brand</NavDropdown.Item>
+                    <NavDropdown.Item href="/vehicle/model">Add Model</NavDropdown.Item>
+                    </>
+                  }
+                  </>
                 </NavDropdown>
                 <NavDropdown title="Claim" id="claimDropDown">
                   <NavDropdown.Item href="/claim">Claim</NavDropdown.Item>
                   <NavDropdown.Item href="/claims">Search Claim</NavDropdown.Item>
+                  <>
+                  {user_role_id == 1 &&
+                    <NavDropdown.Item href="/claim/subjects">Add Subjects</NavDropdown.Item>
+                  }
+                  </>
                 </NavDropdown>
               </Nav>
             )}

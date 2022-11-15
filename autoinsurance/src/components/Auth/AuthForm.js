@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,11 +8,18 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
 
 const AuthForm = (props) => {
+  const [validated, setValidated] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setValidated(true);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      return;
+    }
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
@@ -31,7 +38,7 @@ const AuthForm = (props) => {
           <h3>Login</h3>
         </Card.Header>
         <Container>
-          <Form onSubmit={submitHandler}>
+          <Form noValidate validated={validated} onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -40,6 +47,9 @@ const AuthForm = (props) => {
                 ref={emailInputRef}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid email.
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
@@ -49,6 +59,9 @@ const AuthForm = (props) => {
                 ref={passwordInputRef}
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid password.
+              </Form.Control.Feedback>
             </Form.Group>
 
             {props.isLoading ? (
