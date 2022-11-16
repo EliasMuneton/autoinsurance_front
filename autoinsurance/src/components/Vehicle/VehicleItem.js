@@ -5,6 +5,8 @@ import { deleteVehicle } from "../../lib/vehicle-api";
 import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
+import { Trash } from "react-bootstrap-icons";
+import { Eye } from "react-bootstrap-icons";
 
 const VehicleItem = (props) => {
   const {
@@ -19,7 +21,7 @@ const VehicleItem = (props) => {
   useEffect(() => {
     if (status === "completed") {
       props.onDeleteVehicle(props.id);
-    } 
+    }
   }, [status]);
 
   const deleteHandler = () => {
@@ -31,7 +33,7 @@ const VehicleItem = (props) => {
   };
   return (
     <tr key={props.id}>
-        <td>{props.email}</td>
+      <td>{props.email}</td>
       <td>{props.licencePlate}</td>
       <td>{props.brand}</td>
       <td>{props.model}</td>
@@ -39,7 +41,7 @@ const VehicleItem = (props) => {
       <td>{props.year}</td>
       <td>
         <Link className="btn" to="#" onClick={viewHandler}>
-          View
+          <Eye color="blue" size={25} />
         </Link>
         {status ? (
           <div>
@@ -47,17 +49,17 @@ const VehicleItem = (props) => {
           </div>
         ) : (
           <Link className="btn" to="#" onClick={deleteHandler}>
-            Delete
+            <Trash color="red" size={25} />
           </Link>
         )}
         <br></br>
-          {error && (
-            <LoadingMessage
-              type={"danger"}
-              header={"Oops! Something Went Wrong Deleting!"}
-              message={props.isError}
-            />
-          )}
+        {error && (
+          <LoadingMessage
+            type={"danger"}
+            header={"Oops! Something Went Wrong Deleting!"}
+            message={props.isError}
+          />
+        )}
       </td>
     </tr>
   );

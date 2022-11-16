@@ -11,6 +11,9 @@ import AddVehiclePage from "./pages/AddVehiclePage";
 import VehiclesPage from "./pages/VehiclesPage";
 import AddClaimPage from "./pages/AddClaimPage";
 import ClaimsPage from "./pages/ClaimsPage";
+import BrandsPage from "./pages/BrandsPage";
+import ModelsPage from "./pages/ModelPage";
+import ClaimSubjectsPage from "./pages/ClaimSubjectPage";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -38,6 +41,22 @@ function App() {
             <Route path="/vehicles">
               <VehiclesPage />
             </Route>
+            <>
+              {authCtx.user_role_id == 1 && (
+                <>
+                <Route path="/brand">
+                  <BrandsPage />
+                </Route>
+                <Route path="/model">
+                  <ModelsPage />
+                </Route>
+                <Route path="/claim_subject">
+                  <ClaimSubjectsPage />
+                </Route>
+                </>
+              )}
+            </>
+
             <Route path="/claim">
               <AddClaimPage />
             </Route>

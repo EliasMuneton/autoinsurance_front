@@ -36,8 +36,8 @@ const MainNavigation = () => {
                   <>
                   {user_role_id == 1 &&
                   <>
-                    <NavDropdown.Item href="/vehicle/brand">Add Brand</NavDropdown.Item>
-                    <NavDropdown.Item href="/vehicle/model">Add Model</NavDropdown.Item>
+                    <NavDropdown.Item href="/brand">Add Brand</NavDropdown.Item>
+                    <NavDropdown.Item href="/model">Add Model</NavDropdown.Item>
                     </>
                   }
                   </>
@@ -47,7 +47,7 @@ const MainNavigation = () => {
                   <NavDropdown.Item href="/claims">Search Claim</NavDropdown.Item>
                   <>
                   {user_role_id == 1 &&
-                    <NavDropdown.Item href="/claim/subjects">Add Subjects</NavDropdown.Item>
+                    <NavDropdown.Item href="/claim_subject">Add Topic</NavDropdown.Item>
                   }
                   </>
                 </NavDropdown>

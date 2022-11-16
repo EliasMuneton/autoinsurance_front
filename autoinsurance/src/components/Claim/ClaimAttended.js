@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import { updateClaim } from "../../lib/claim-api";
 import AuthContext from "../../store/auth-context";
-import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
+import { Check2 } from 'react-bootstrap-icons';
 
 const ClaimAttended = (props) => {
   const {
@@ -36,7 +36,7 @@ const ClaimAttended = (props) => {
   return (
     <>
       <Link className="btn" to="#" onClick={updateStatusHandler}>
-        Attend
+      <Check2 color="green" size={25} />
       </Link>
       <br></br>
       {error && (

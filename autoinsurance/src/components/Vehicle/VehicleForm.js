@@ -65,6 +65,7 @@ const VehicleForm = (props) => {
       vehicleYearInputRef.current.value = props.vehicleData[0]["vehicleYear"];
       licencePlateInputRef.current.value = props.vehicleData[0]["licencePlate"];
       descriptionInputRef.current.value = props.vehicleData[0]["description"];
+      setValidSelect(true);
     }
     if (props.isSearch) {
       setValidSelect(true);

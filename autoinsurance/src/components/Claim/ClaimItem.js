@@ -7,6 +7,8 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
 import ClaimAttended from "./ClaimAttended";
 import Badge from "react-bootstrap/Badge";
+import { Trash } from 'react-bootstrap-icons';
+import { Eye } from 'react-bootstrap-icons'
 
 const ClaimItem = (props) => {
   const {
@@ -49,7 +51,7 @@ const ClaimItem = (props) => {
 
       <td>
         <Link className="btn" to="#" onClick={viewHandler}>
-          View
+        <Eye color="blue" size={25} />
         </Link>
         {status ? (
           <div>
@@ -67,7 +69,7 @@ const ClaimItem = (props) => {
             )}
 
             <Link className="btn" to="#" onClick={deleteHandler}>
-              Delete
+            <Trash color="red" size={25} />
             </Link>
           </>
         )}

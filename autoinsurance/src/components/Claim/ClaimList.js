@@ -15,7 +15,7 @@ const ClaimList = (props) => {
           <thead>
             <tr>
               <th>Email</th>
-              <th>Subject</th>
+              <th>Topic</th>
               <th>Description</th>
               <th>Status</th>
               <th>Actions</th>

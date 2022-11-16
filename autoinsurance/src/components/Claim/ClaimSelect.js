@@ -92,7 +92,7 @@ const ClaimSelect = (props) => {
 
       <Col sm={12} md={12} lg={6}>
         <Select
-          placeholder="Select Subject"
+          placeholder="Select Topic"
           value={claimSubject}
           options={responseData.responseDataSubject}
           onChange={handleSubjectChange}
