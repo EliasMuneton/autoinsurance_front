@@ -36,6 +36,7 @@ const ClaimItem = (props) => {
 
   return (
     <tr key={props.id}>
+      <td>{props.vehicle.licencePlate} - {props.vehicle.model.brand.brandName} - {props.vehicle.model.modelName}</td>
       <td>{props.email}</td>
       <td>{props.claimSubject}</td>
       <td>{props.description}</td>

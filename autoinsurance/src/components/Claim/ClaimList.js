@@ -33,6 +33,7 @@ const ClaimList = (props) => {
                   claimStatusId={claim["claimStatus"]["claimStatusId"]}
                   description={claim["description"]}
                   email={claim["user"]["email"]}
+                  vehicle={claim["vehicle"]}
                   onDeleteClaim={props.onDeleteClaim}
                   onClaimUpdate={props.onClaimUpdate}
                   onViewV={props.onViewClaim}

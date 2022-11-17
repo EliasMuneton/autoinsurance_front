@@ -35,6 +35,8 @@ const VehicleList = (props) => {
                     email={vehicle["user"]["email"]}
                     onDeleteVehicle={props.onDeleteVehicle}
                     onViewV={props.onViewVehicle}
+                    isSearchClaim={props.isSearchClaim}
+                    onSelectVehicle={props.onSelectVehicle}
                   />                
               ))}
           </tbody>
