@@ -14,6 +14,7 @@ const ClaimList = (props) => {
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th>Vehicle</th>
               <th>Email</th>
               <th>Topic</th>
               <th>Description</th>
@@ -32,7 +33,6 @@ const ClaimList = (props) => {
                   claimStatus={claim["claimStatus"]["description"]}
                   claimStatusId={claim["claimStatus"]["claimStatusId"]}
                   description={claim["description"]}
-                  email={claim["user"]["email"]}
                   vehicle={claim["vehicle"]}
                   onDeleteClaim={props.onDeleteClaim}
                   onClaimUpdate={props.onClaimUpdate}

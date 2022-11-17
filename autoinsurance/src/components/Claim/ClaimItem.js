@@ -7,8 +7,8 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import LoadingMessage from "../UI/LodingMessage";
 import ClaimAttended from "./ClaimAttended";
 import Badge from "react-bootstrap/Badge";
-import { Trash } from 'react-bootstrap-icons';
-import { Eye } from 'react-bootstrap-icons'
+import { Trash } from "react-bootstrap-icons";
+import { Eye } from "react-bootstrap-icons";
 
 const ClaimItem = (props) => {
   const {
@@ -36,8 +36,11 @@ const ClaimItem = (props) => {
 
   return (
     <tr key={props.id}>
-      <td>{props.vehicle.licencePlate} - {props.vehicle.model.brand.brandName} - {props.vehicle.model.modelName}</td>
-      <td>{props.email}</td>
+      <td>
+        {props.vehicle.licencePlate} - {props.vehicle.model.brand.brandName} -{" "}
+        {props.vehicle.model.modelName}
+      </td>
+      <td>{props.vehicle.user.email}</td>
       <td>{props.claimSubject}</td>
       <td>{props.description}</td>
       {props.claimStatusId === 1 ? (
@@ -51,16 +54,13 @@ const ClaimItem = (props) => {
       )}
 
       <td>
-        <Link className="btn" to="#" onClick={viewHandler}>
-        <Eye color="blue" size={25} />
-        </Link>
         {status ? (
           <div>
             <LoadingSpinner />
           </div>
         ) : (
           <>
-            {(authCtx.user_role_id == 1 && props.claimStatusId == 1) && (
+            {authCtx.user_role_id == 1 && props.claimStatusId == 1 && (
               <ClaimAttended
                 claimSubjectId={props.claimSubjectId}
                 description={props.description}
@@ -68,10 +68,16 @@ const ClaimItem = (props) => {
                 onUpdateStatusHandler={props.onClaimUpdate}
               />
             )}
-
-            <Link className="btn" to="#" onClick={deleteHandler}>
-            <Trash color="red" size={25} />
-            </Link>
+            {props.claimStatusId == 1 && (
+              <>
+                <Link className="btn" to="#" onClick={viewHandler}>
+                  <Eye color="blue" size={25} />
+                </Link>
+                <Link className="btn" to="#" onClick={deleteHandler}>
+                  <Trash color="red" size={25} />
+                </Link>
+              </>
+            )}
           </>
         )}
         <br></br>
