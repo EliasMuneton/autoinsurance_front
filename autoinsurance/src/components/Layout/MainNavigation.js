@@ -31,23 +31,26 @@ const MainNavigation = () => {
             {isLoggedIn && (
               <Nav className="me-auto">
                 <NavDropdown title="Vehicle" id="vehicleDropDown">
-                  <NavDropdown.Item href="/vehicle">Vehicle</NavDropdown.Item>
                   <NavDropdown.Item href="/vehicles">Search Vehicle</NavDropdown.Item>
                   <>
-                  {user_role_id == 1 &&
+                  {user_role_id == 1 ?
                   <>
                     <NavDropdown.Item href="/brand">Add Brand</NavDropdown.Item>
                     <NavDropdown.Item href="/model">Add Model</NavDropdown.Item>
                     </>
+                  :
+                  <NavDropdown.Item href="/vehicle">Vehicle</NavDropdown.Item>
                   }
                   </>
                 </NavDropdown>
                 <NavDropdown title="Claim" id="claimDropDown">
-                  <NavDropdown.Item href="/claim">Claim</NavDropdown.Item>
+                  
                   <NavDropdown.Item href="/claims">Search Claim</NavDropdown.Item>
                   <>
-                  {user_role_id == 1 &&
+                  {user_role_id == 1 ? 
                     <NavDropdown.Item href="/claim_subject">Add Topic</NavDropdown.Item>
+                  :
+                  <NavDropdown.Item href="/claim">Claim</NavDropdown.Item>
                   }
                   </>
                 </NavDropdown>
